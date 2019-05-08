@@ -37,8 +37,8 @@ class App extends React.Component {
     }).then(res => {
       this.setState(
         { pHResult: res.data.pHResult, 
-          pSResult: res.data.pSResult, 
-          pNResult: res.data.pHResult + res.data.pSResult === 1 ? 0 : Math.abs(res.data.pHResult - res.data.pSResult) })
+          pSResult: res.data.pSResult
+        })
     })
   }
 
@@ -48,8 +48,8 @@ class App extends React.Component {
       <h2>Training data info</h2>
       <div class="form-group">
       <div>Total emails: {this.state.total}</div>
-      <div>Spam emails: {this.state.totalHam}</div>
-      <div>Not spam emails: {this.state.totalSpam}</div>
+      <div>Spam emails: {this.state.totalSpam}</div>
+      <div>Not spam emails: {this.state.totalHam}</div>
       </div>
       <div class="form-group">
       <h2>Test your email content</h2>
@@ -63,9 +63,6 @@ class App extends React.Component {
         <>
         <p class="alert alert-danger">Probability of spam: {(this.state.pSResult * 100).toFixed(2)} %</p>
         <p class="alert alert-success">Probability of not spam: {(this.state.pHResult * 100).toFixed(2)} %</p>
-        {this.state.pNResult !== null && this.state.pNResult > 0.00 ?
-        <p class="alert alert-secondary">Probability of neutral: {(this.state.pNResult * 100).toFixed(2)} %</p>
-        : null }
         </>
         : null}
       </div>
